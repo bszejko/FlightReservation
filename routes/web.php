@@ -31,7 +31,7 @@ Route::group(['prefix' => 'travel'], function () {
 
 use App\Http\Controllers\BookingController;
 
-//ścieżki do Booking Controller (na razie nieużywany)
+//ścieżki do Booking Controller 
 Route::get('/travel/booking/create/{flightId}', [BookingController::class, 'create'])->name('booking.create')->middleware('auth');
 
 Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
@@ -40,7 +40,14 @@ Route::get('/booking/confirmation/{bookingId}', [BookingController::class, 'conf
 
 Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index')->middleware('auth');
 
+Route::delete('/booking/cancel/{booking}', [BookingController::class, 'cancel'])->name('booking.cancel');
+
+
 use App\Http\Controllers\FlightController;
 
 //scieżka do Flight Controller
 Route::post('/flights', [FlightController::class, 'store'])->name('flights.store');
+
+use App\Http\Controllers\QuestionController;
+
+Route::post('/question', [QuestionController::class, 'store'])->name('question.store');

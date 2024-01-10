@@ -15,6 +15,7 @@ class Flight extends Model
         'from',
         'to',
         'departure_time',
-        'arrival_time'
+        'arrival_time',
+        'price'
     ];
 }

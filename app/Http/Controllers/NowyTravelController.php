@@ -9,6 +9,7 @@ class NowyTravelController extends Controller
 {
     public function index()
     {
+
         return view('travel.index');
     }
 
@@ -21,6 +22,8 @@ class NowyTravelController extends Controller
     $Date = date('Ymd', strtotime($rawDate));
     $rawReturnDate = $request->input('dateRange2') ?? session('dateRange2');
     $ReturnDate = date('Ymd', strtotime($rawReturnDate));
+
+
 
     //tworzenie sesji
     session([
@@ -37,13 +40,13 @@ class NowyTravelController extends Controller
 
     // Zapytanie o loty powrotne
     $returnApiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => '5dd99751f7msh24aaf2c55ef5f1cp122953jsn56471b9dded5',
+        'X-RapidAPI-Key' => '42dd465c58msh952fde3e6b04e0ap112164jsn5a0846e6a7a2',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$ToCode}/{$FromCode}/{$ReturnDate}?Connection=DIRECT");
 
     //Zapytanie api o loty pierwotne
     $apiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => '5dd99751f7msh24aaf2c55ef5f1cp122953jsn56471b9dded5',
+        'X-RapidAPI-Key' => '42dd465c58msh952fde3e6b04e0ap112164jsn5a0846e6a7a2',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$FromCode}/{$ToCode}/{$Date}?Connection=DIRECT");
 
@@ -69,7 +72,8 @@ class NowyTravelController extends Controller
                         'To' => (string)$leg->ArrivalAirport['LocationCode'],
                         'DepartureDateTime' => $formattedDepartureDateTime,
                         'ArrivalDateTime' => $formattedArrivalDateTime,
-                        'id' => $id
+                        'id' => $id,
+                        'price' => rand(55, 1000) // Generowanie losowej ceny
                     ];
                     array_push($returnFlightsArray, $flight);
         }
@@ -98,7 +102,8 @@ class NowyTravelController extends Controller
                         'To' => (string)$leg->ArrivalAirport['LocationCode'],
                         'DepartureDateTime' => $formattedDepartureDateTime,
                         'ArrivalDateTime' => $formattedArrivalDateTime,
-                        'id' => $id
+                        'id' => $id,
+                        'price' => rand(55, 1000) // Generowanie losowej ceny
                     ];
                     array_push($flightsArray, $flight);
                 }
@@ -115,6 +120,7 @@ class NowyTravelController extends Controller
                 'Date' => $Date,           // Dodaje sformatowaną datę wylotu
                 'ReturnDate' => $ReturnDate // Dodaje sformatowaną datę powrotu
             ]);
+            
 
         //obsługa błędów
         } else {

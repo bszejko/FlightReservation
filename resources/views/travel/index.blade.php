@@ -7,8 +7,8 @@
     <title>Wybierz Miejsce Podróży</title>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap');
-    </style>
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@500;700&display=swap');
+</style>
     
     <style>
         body {
@@ -18,7 +18,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family:'Rethink Sans', sans-serif;
             background-image: url('images/lot3.webp');
             background-size: cover;
             position: relative;
@@ -34,13 +34,13 @@
             height: 100%;
             background-image: url('images/lot3.webp');
             background-size: cover;
-            filter: brightness(0.6);
-            transition: transform 10s ease-in-out;
+            filter: brightness(0.5);
+            transition: transform 20s ease-in-out;
         }
 
         body:hover::before {
             transform: scale(1.5); /* Przybliżenie o 20% */
-            filter: brightness(0.6);
+            filter: brightness(0.5);
         }
 
 
@@ -52,6 +52,7 @@
             top: 0;
             z-index: 2;
         }
+       
 
         nav {
             display: flex;
@@ -65,7 +66,7 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            font-family: 'Carrois Gothic', sans-serif;
+            font-family: 'Rethink Sans', sans-serif;
             font-size: 16px;
             margin-left: 50px;
             transition: color 0.3s ease;
@@ -80,7 +81,7 @@
         }
 
         h2 {
-            font-family: 'Carrois Gothic', sans-serif;
+            font-family: 'Rethink Sans', sans-serif;
             font-size: 36px;
             margin-bottom: 20px;
             color: #fff;
@@ -162,32 +163,30 @@
             background-color: #2980b9;
             color: #fff;
         }
+
     </style>
 </head>
 
 <body>
 
-    <header>
-        <!-- menu -->
-    <nav>
-        <a href="{{ route('travel') }}">Wyszukaj loty</a>
-        
-        <a href="{{ route('login') }}">Zaloguj się</a>
-      
-        </nav>
-    </header>
+<header>
+@include('components.navbar')  {{-- Dołączenie navbara --}}
+</header>
 
     <!-- Formularz wybierania lotnisk i dat -->
-    <h2>ODKRYJ ŚWIAT JEDNYM KLIKNIĘCIEM</h2>
+    <div class="container-text">
+    <h2 class="animatedtext">ODKRYJ ŚWIAT JEDNYM KLIKNIĘCIEM</h2>
+    </div>
     <p style="color: white; font-size: 10px; text-align: center;">Rezerwuj najtańsze loty - szybko, tanio, prosto</p>
     <div class="forms-container" style="margin-top: 50px;">
-        <form action="{{ route('search.flights') }}" method="post">
+        <form id="flightForm" action="{{ route('search.flights') }}" method="post">
             @csrf
             <div class="form-group">
                 <input type="text" name="departureCountry" id="departureCountry" placeholder="Kod lotniska wylotu" required>
             </div>
             <div class="form-group">
                 <input type="text" name="arrivalCountry" id="arrivalCountry" placeholder="Kod lotniska przylotu" required>
+              
             </div>
             <div class="form-group">
                 <input type="text" name="dateRange" id="dateRange" required 
@@ -208,4 +207,26 @@
            
         </form>
     </div>
+
+    <script>
+    document.getElementById('flightForm').addEventListener('submit', function(event) {
+        // Walidacja kodu IATA
+        var departureCountry = document.getElementById('departureCountry').value;
+        var arrivalCountry = document.getElementById('arrivalCountry').value;
+        if (departureCountry.length !== 3 || arrivalCountry.length !== 3) {
+            alert('Kody IATA muszą mieć dokładnie 3 litery.');
+            event.preventDefault(); // Zapobiegaj wysłaniu formularza
+            return;
+        }
+
+        // Walidacja dat
+        var departureDate = new Date(document.getElementById('dateRange').value);
+        var returnDate = new Date(document.getElementById('dateRange2').value);
+        if (returnDate <= departureDate) {
+            alert('Data powrotu musi być późniejsza niż data wylotu.');
+            event.preventDefault(); // Zapobiegaj wysłaniu formularza
+        }
+    });
+</script>
+
 </body>

@@ -16,8 +16,8 @@ class FlightController extends Controller
         
         // Walidacja danych wejściowych
         $request->validate([
-            'from' => 'required|string|max:255',
-            'to' => 'required|string|max:255',
+            'from' => 'required|string|max:3',
+            'to' => 'required|string|max:3',
             'departure_time' => 'required|date',
             'arrival_time' => 'required|date',
         ]);
@@ -27,8 +27,10 @@ class FlightController extends Controller
             'from' => $request->from,
             'to' => $request->to,
             'departure_time' => $request->departure_time,
-            'arrival_time' => $request->arrival_time
+            'arrival_time' => $request->arrival_time,
+            'price' => $request->price // Losowa cena między 100 a 1000
         ]);
+        
 
         // Sprawdzenie czy lot jest poprawnie utworzony
         if ($flight) {
@@ -42,7 +44,7 @@ class FlightController extends Controller
         
         }
         // Przekierowanie do search.flights z wiadomością (styl okienka jest w kodzie search.blade.php)
-    return redirect()->route('search.flights')->with('success', 'Lot o numerze ' . $flight->id . ' został zarezerwowany.');
+    return redirect()->route('search.flights')->with('success', 'Lot o ID ' . $flight->id . ' został zarezerwowany.');
     }
 
     

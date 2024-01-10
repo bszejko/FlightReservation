@@ -15,10 +15,15 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
-    {
-        return view('auth.login');
+    public function create(Request $request): View
+{
+    if ($request->has('previous')) {
+        session(['url.intended' => $request->input('previous')]);
     }
+
+    return view('auth.login');
+}
+
 
     /**
      * Handle an incoming authentication request.
@@ -43,6 +48,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/travel');
     }
 }

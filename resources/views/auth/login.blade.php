@@ -5,7 +5,7 @@
 
 
     
-    <form methclass="form-login" od="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="form-login">
         @csrf
 
         <!-- Email Address -->

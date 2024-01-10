@@ -8,13 +8,24 @@ use App\Models\Flight;
 class BookingController extends Controller
 {
 
+
     public function index()
     {
-        // Pobierz rezerwacje dla zalogowanego użytkownika
-    $userBookings = Booking::where('user_id', auth()->id())->get();
-
-    // Przekaż dane do widoku
-    return view('bookings.index', compact('userBookings'));
+        // Pobieranie rezerwacji dla zalogowanego użytkownika
+        $userBookings = Booking::with('flight')
+        ->where('user_id', auth()->id())
+        ->get();
+        //suma cen
+    
+        $totalPrice = $userBookings->sum(function ($booking) {
+            return $booking->flight->price;
+        });
+        
+    // Przekazanie danych do widoku
+    return view('bookings.index', [
+        'userBookings' => $userBookings, 
+        'totalPrice' => $totalPrice
+    ]);
 
     }
     public function create(Request $request)
@@ -25,6 +36,7 @@ class BookingController extends Controller
             'to' => $request->to,
             'departure_time' => $request->departure_time,
             'arrival_time' => $request->arrival_time,
+            'price' => $request->price
         ];
         
     
@@ -68,5 +80,18 @@ class BookingController extends Controller
         return redirect()->route('booking.confirmation', ['bookingId' => $booking->id]);
     }
     
-        
+        public function cancel(Request $request, $bookingId)
+{
+    $booking = Booking::where('id', $bookingId)
+                      ->where('user_id', auth()->id())
+                      ->first();
+
+    if ($booking) {
+        $booking->delete();
+        return response()->json(['success' => 'Rezerwacja została anulowana.']);
+    }
+
+    return response()->json(['error' => 'Rezerwacja nie znaleziona.'], 404);
+}
+
     }
