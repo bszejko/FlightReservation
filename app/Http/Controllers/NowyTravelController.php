@@ -45,13 +45,13 @@ class NowyTravelController extends Controller
 
     // Zapytanie o loty powrotne
     $returnApiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => 'dcb655165emsh0adf6878cf32d9bp17d87ejsn4a66aadd9db7',
+        'X-RapidAPI-Key' => '5dd99751f7msh24aaf2c55ef5f1cp122953jsn56471b9dded5',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$ToCode}/{$FromCode}/{$ReturnDate}?Connection=DIRECT");
 
     //Zapytanie api o loty pierwotne
     $apiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => 'dcb655165emsh0adf6878cf32d9bp17d87ejsn4a66aadd9db7',
+        'X-RapidAPI-Key' => '5dd99751f7msh24aaf2c55ef5f1cp122953jsn56471b9dded5',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$FromCode}/{$ToCode}/{$Date}?Connection=DIRECT");
 

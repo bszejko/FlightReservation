@@ -6,60 +6,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700&display=swap');
 </style>
-<style>
+
+    
    
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; /* Zmieniono na space-between */
-        width: 100%;
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    nav img {
-        /* Styl dla logo, jeśli potrzebny */
-    }
-
-    .nav-links {
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-family: 'Rethink Sans', sans-serif;
-        font-size: 16px;
-        margin-left: 50px;
-        transition: color 0.3s ease;
-    }
-    nav a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Rethink Sans', sans-serif;
-            font-size: 16px;
-            margin-left: 50px;
-            transition: color 0.3s ease;}/* style dla linków w navbarze */
-
+<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
     
-</style>
-    
-    
-
-<nav>
-    <img src="/images/logo.png" alt="Logo" style="height: 25px;">
-    <div class="nav-links">
-        <a href="{{ route('travel') }}">Wyszukaj loty</a>
-        @if(auth()->check())
+    <div class="lg:flex lg:gap-x-20">
+      <a href="{{ route('travel') }}" class="text-lg font-semibold leading-6 text-gray-900">Search flights</a>
+    </div>
+    <div class="lg:flex lg:flex-1 lg:justify-end text-lg">
+    @if(auth()->check())
             <a href="{{ route('bookings.index') }}">Rezerwacje</a>
             <a href="{{ route('dashboard') }}">Moje konto</a> 
         @else
-            <a href="{{ route('login', ['previous' => url()->current()]) }}">Zaloguj się</a>
+            <a href="{{ route('login', ['previous' => url()->current()]) }}">Zaloguj się <span aria-hidden="true">&rarr;</span></a>
             
         @endif
     </div>
-</nav>
-
-   
+  </nav>
