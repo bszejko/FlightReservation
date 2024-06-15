@@ -43,11 +43,10 @@
             margin-left: 50px;
             transition: color 0.3s ease;}/* style dla linków w navbarze */
 
-    /* Możesz dodać więcej stylów tutaj */
+    
 </style>
     
     
-
 
 <nav>
     <img src="/images/logo.png" alt="Logo" style="height: 25px;">
@@ -63,3 +62,4 @@
     </div>
 </nav>
 
+   

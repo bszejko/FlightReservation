@@ -96,8 +96,8 @@
     </style>
 </head>
 <body>
-    <header>
-    @include('components.navbar')  
+<header>
+@include('components.navbar')  {{-- Dołączenie navbara --}}
     </header>
 <!-- Informacje o locie który jest rezerwowany -->
 <section class=blue>
@@ -121,6 +121,9 @@
         <input type="hidden" name="departure_time" value="{{ $flightDetails['departure_time'] }}">
         <input type="hidden" name="arrival_time" value="{{ $flightDetails['arrival_time'] }}">
         <input type="hidden" name="price" value="{{ $flightDetails['price'] }}">
+        <input type="hidden" name="rawDate" value="{{ request('rawDate') }}">
+        <input type="hidden" name="rawReturnDate" value="{{ request('rawReturnDate') }}">
+
         <button class="btn btn1"  type="submit">Potwierdź rezerwację</button>
     </form>
 

@@ -44,7 +44,10 @@ class FlightController extends Controller
         
         }
         // Przekierowanie do search.flights z wiadomością (styl okienka jest w kodzie search.blade.php)
-    return redirect()->route('search.flights')->with('success', 'Lot o ID ' . $flight->id . ' został zarezerwowany.');
+    return redirect()->route('search.flights')
+        ->with('success', 'Lot o ID ' . $flight->id . ' został zarezerwowany.')
+        ->with('rawDate', $request->input('rawDate'))
+        ->with('rawReturnDate', $request->input('rawReturnDate'));
     }
 
     

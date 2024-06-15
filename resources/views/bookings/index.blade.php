@@ -217,7 +217,7 @@ section {
 
 <header>
 @include('components.navbar')  {{-- Dołączenie navbara --}}
-</header>
+    </header>
 
 <section>
 @foreach ($userBookings as $booking)

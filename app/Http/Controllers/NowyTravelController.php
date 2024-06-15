@@ -23,6 +23,11 @@ class NowyTravelController extends Controller
     $rawReturnDate = $request->input('dateRange2') ?? session('dateRange2');
     $ReturnDate = date('Ymd', strtotime($rawReturnDate));
 
+    // Error handling for FromCode
+    if (!$FromCode) {
+        // Redirect back or to a specific page with an error message
+        return redirect('travel')->with('error', 'Departure country is required.');
+    }
 
 
     //tworzenie sesji
@@ -40,13 +45,13 @@ class NowyTravelController extends Controller
 
     // Zapytanie o loty powrotne
     $returnApiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => '42dd465c58msh952fde3e6b04e0ap112164jsn5a0846e6a7a2',
+        'X-RapidAPI-Key' => 'dcb655165emsh0adf6878cf32d9bp17d87ejsn4a66aadd9db7',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$ToCode}/{$FromCode}/{$ReturnDate}?Connection=DIRECT");
 
     //Zapytanie api o loty pierwotne
     $apiResponse = Http::withHeaders([
-        'X-RapidAPI-Key' => '42dd465c58msh952fde3e6b04e0ap112164jsn5a0846e6a7a2',
+        'X-RapidAPI-Key' => 'dcb655165emsh0adf6878cf32d9bp17d87ejsn4a66aadd9db7',
         'X-RapidAPI-Host' => 'timetable-lookup.p.rapidapi.com',
     ])->get("https://timetable-lookup.p.rapidapi.com/TimeTable/{$FromCode}/{$ToCode}/{$Date}?Connection=DIRECT");
 
@@ -75,6 +80,7 @@ class NowyTravelController extends Controller
                         'id' => $id,
                         'price' => rand(55, 1000) // Generowanie losowej ceny
                     ];
+                    
                     array_push($returnFlightsArray, $flight);
         }
     }
@@ -113,7 +119,7 @@ class NowyTravelController extends Controller
             return view('travel.search', [
                 'flightsArray' => $flightsArray, 
                 'returnFlightsArray' => $returnFlightsArray,
-                'FromCode' => $FromCode,
+                'FromCode' => $FromCode ?? '',
                 'ToCode' => $ToCode,
                 'rawDate' => $rawDate,
                 'rawReturnDate' => $rawReturnDate,

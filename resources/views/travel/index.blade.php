@@ -171,7 +171,7 @@
 
 <header>
 @include('components.navbar')  {{-- Dołączenie navbara --}}
-</header>
+    </header>
 
     <!-- Formularz wybierania lotnisk i dat -->
     <div class="container-text">
