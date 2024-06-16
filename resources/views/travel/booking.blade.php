@@ -4,13 +4,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@500&display=swap" rel="stylesheet">
     <title>Twoja rezerwacja</title>
     @vite('resources/css/app.css')
+    <style>
+        .background-image-button {
+            background-color: #4f46e5;
+            
+        }
+    </style>
 </head>
-<body >
+<body>
 
 <header>
     @include('components.navbar', [
         'backgroundImage' => asset('images/beams-basic.png')
-         ]) 
+    ]) 
 </header>
 
 <div class="w-3/4 mx-auto justify-center">
@@ -18,14 +24,14 @@
     <h3 class="text-lg font-semibold leading-7 text-gray-900">Your reservation</h3>
     <p class="mt-1 max-w-2xl text-base leading-6 text-gray-500">Check the details of your reservation</p>
   </div>
-  <div class=" w-3/4 mx-auto justify-center mt-6 border-t border-gray-200">
+  <div class="w-3/4 mx-auto justify-center mt-6 border-t border-gray-200">
     <dl class="divide-y divide-gray-200">
 
       <div class="px-4 py-6 sm:flex sm:justify-between ">
         <dt class="text-base font-medium leading-6 text-gray-900">From</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:mt-0">{{ $flightDetails['from'] }}</dd>
       </div>
-      <div class="px-4 py-6 sm:flex sm:justify-between  border-t border-gray-200">
+      <div class="px-4 py-6 sm:flex sm:justify-between border-t border-gray-200">
         <dt class="text-base font-medium leading-6 text-gray-900">To</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:mt-0">{{ $flightDetails['to'] }}</dd>
       </div>
@@ -77,7 +83,7 @@
       <input type="hidden" name="rawDate" value="{{ request('rawDate') }}">
       <input type="hidden" name="rawReturnDate" value="{{ request('rawReturnDate') }}">
 
-      <button class="btn btn1 w-full py-3 bg-blue-900 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300" type="submit">
+      <button type="submit" class="rounded-md bg-indigo-600 background-image-button px-3 py-2 text-la font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           Potwierdź rezerwację
       </button>
   </form>

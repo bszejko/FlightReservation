@@ -20,6 +20,14 @@
             z-index: -1; /* Ensure the background is behind other content */
         }
         }
+
+        .background-image-button {
+            background-color: #4f46e5;
+            padding:5px;
+            margin-right:10px
+            
+        }
+    
     </style>
 </head>
 <body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-center pt-8">
@@ -109,8 +117,8 @@
                     'departure_time' => $flight['DepartureDateTime'],
                     'arrival_time' => $flight['ArrivalDateTime'],
                     'price' => $flight['price']
-                ]) }}" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Rezerwuj
+                ]) }}" class="mr-4 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white background-image-button shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Reserve
                 </a>
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-900">See details <span aria-hidden="true">→</span></a>
                 </div>
@@ -148,8 +156,8 @@
                     <p class="text-xl font-bold text-gray-900">{{ $flight['price'] }}zł</p>
                     <p class="text-sm text-gray-500 mb-2">Flight number: {{ $flight['id'] }}</p>
                     <div class="mt-2 flex items-center justify-center gap-x-6">
-                        <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                           onclick="submitForm('{{ route('booking.create', ['flightId' => $flight['id'],'rawReturnDate'=>$rawReturnDate, 'from' => $ToCode, 'to' => $FromCode, 'departure_time' => $flight['DepartureDateTime'], 'arrival_time' => $flight['ArrivalDateTime'], 'price' => $flight['price']]) }}')">Rezerwuj</a>
+                        <a href="#" class="background-image-button rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                           onclick="submitForm('{{ route('booking.create', ['flightId' => $flight['id'],'rawReturnDate'=>$rawReturnDate, 'from' => $ToCode, 'to' => $FromCode, 'departure_time' => $flight['DepartureDateTime'], 'arrival_time' => $flight['ArrivalDateTime'], 'price' => $flight['price']]) }}')">Reserve</a>
                         <a href="#" class="text-sm font-semibold leading-6 text-gray-900">See details <span aria-hidden="true">→</span></a>
                     </div>
                 </div>
