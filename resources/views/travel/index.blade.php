@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wybierz Miejsce Podróży</title>
-    
+    @vite('resources/css/app.css')
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@500;700&display=swap');
 </style>
@@ -64,7 +64,7 @@
         }
 
         nav a {
-            color: #fff;
+            color: white;
             text-decoration: none;
             font-family: 'Rethink Sans', sans-serif;
             font-size: 16px;
@@ -148,7 +148,7 @@
             padding: 12px 24px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #3498db;
+            background-color: #4f46e5;
             color: #fff;
             border: none;
             border-radius: 1px;
@@ -156,13 +156,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #4f46e5;
             
         }
 
         button:hover {
-            background-color: #2980b9;
-            color: #fff;
+            background-color: #4f46e5;
+            color: #4f46e5;
         }
+        
 
     </style>
 </head>
@@ -170,12 +172,14 @@
 <body>
 
 <header>
-@include('components.navbar')  {{-- Dołączenie navbara --}}
+@include('components.navbar', ['textColor' => 'text-white'])
     </header>
 
     <!-- Formularz wybierania lotnisk i dat -->
     <div class="container-text">
+        <div class="font-extrabold">
     <h2 class="animatedtext">ODKRYJ ŚWIAT JEDNYM KLIKNIĘCIEM</h2>
+    </div>
     </div>
     <p style="color: white; font-size: 10px; text-align: center;">Rezerwuj najtańsze loty - szybko, tanio, prosto</p>
     <div class="forms-container" style="margin-top: 50px;">
